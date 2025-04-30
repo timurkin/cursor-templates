@@ -17,7 +17,7 @@ interface VsCodeApi {
 
 // Declare the global acquireVsCodeApi function (provided by VS Code webview)
 declare const acquireVsCodeApi: () => VsCodeApi;
-const vscode = acquireVsCodeApi(); // Get the VS Code API instance
+const vscode = 'acquireVsCodeApi' in window ? acquireVsCodeApi() : window; // Get the VS Code API instance
 
 function App() {
   const [templates, setTemplates] = useState<Template[]>([]);
@@ -170,7 +170,7 @@ function App() {
             rows={10} // Adjust rows as needed
           />
         </div>
-        <div className="form-actions">
+        <div className="form-actions template-actions">
           <button onClick={handleSave} className="save-button">Save</button>
           <button onClick={handleCancel} className="cancel-button">Cancel</button>
         </div>
@@ -181,7 +181,6 @@ function App() {
   // Default: View mode
   return (
     <main>
-      <h1>Cursor Templates</h1>
       <button onClick={handleAddClick} className="add-button">Add New Template</button>
       <ul className="template-list">
         {templates.length === 0 ? (
