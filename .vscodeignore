@@ -12,9 +12,8 @@ node_modules/**
 
 # Source files (ignore main extension source and webview source)
 src/**
-webview-ui/src/**
-webview-ui/public/**
-webview-ui/index.html # Ignore source index.html
+webview-ui/**
+!webview-ui/dist
 
 # Config and dev files
 .gitignore
