@@ -1,0 +1,12 @@
+.template-list {
+  list-style: none;
+  padding: 0;
+}
+.template-item {
+  background-color: var(--vscode-editor-background);
+  border: 1px solid var(--vscode-button-border);
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px
+}
+

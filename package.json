@@ -1,0 +1,117 @@
+{
+  "name": "cursor-templates",
+  "displayName": "Cursor Templates",
+  "description": "Define text templates in settings and paste them into the Cursor chat.",
+  "publisher": "your-publisher-name",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onWebviewPanel:cursor-templates-webview-view"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "cursor-templates-view-container",
+          "title": "Cursor Templates",
+          "icon": "$(list-flat)"
+        }
+      ]
+    },
+    "views": {
+      "cursor-templates-view-container": [
+        {
+          "id": "cursor-templates-webview-view",
+          "name": "Templates",
+          "type": "webview",
+          "icon": "$(list-flat)",
+          "contextualTitle": "Cursor Templates"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Cursor Templates",
+      "properties": {
+        "cursor-templates.templates": {
+          "type": "array",
+          "default": [],
+          "description": "An array of text templates to be used with Cursor.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "text"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "A short name/identifier for the template (used for command ID and display)."
+              },
+              "text": {
+                "type": "string",
+                "description": "The text content of the template."
+              }
+            }
+          }
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "cursor-templates.showTemplateList",
+        "title": "Cursor Template: Show Template List"
+      },
+      {
+        "command": "cursor-templates.addTemplate",
+        "title": "Cursor Template: Add New Template",
+        "category": "Cursor Templates"
+      },
+      {
+        "command": "cursor-templates.assignKeybinding",
+        "title": "Cursor Template: Assign Keybinding",
+        "category": "Cursor Templates"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "cursor-templates.showTemplateList",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.99.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "esbuild": "^0.25.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.3",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}

@@ -1,0 +1,41 @@
+# VS Code specific files
+.vscode/**
+.vscode-test/**
+
+# Build output (keep the main extension build output, e.g., dist/)
+# out/** # Removed, assuming output is 'dist' based on package.json
+# src/** # Ignore TS source
+
+# Dependencies
+node_modules/**
+**/node_modules/** # Ignore nested node_modules like in webview-ui
+
+# Source files (ignore main extension source and webview source)
+src/**
+webview-ui/src/**
+webview-ui/public/**
+webview-ui/index.html # Ignore source index.html
+
+# Config and dev files
+.gitignore
+.yarnrc
+eslint.config.mjs
+**/eslint.config.mjs
+esbuild.js
+tsconfig.json
+**/tsconfig.json
+tsconfig.tsbuildinfo
+**/*.map
+# **/*.ts # Covered by src/** and webview-ui/src/**
+.vscode-test.*
+vsc-extension-quickstart.md
+
+# Webview UI specific dev files
+webview-ui/package.json
+webview-ui/package-lock.json
+webview-ui/vite.config.*
+webview-ui/README.md
+webview-ui/.git*
+
+# Ensure build output from webview-ui is NOT ignored
+# (No explicit ! needed if nothing above ignores it)
